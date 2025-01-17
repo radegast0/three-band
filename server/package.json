@@ -1,0 +1,14 @@
+{
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon --exec ts-node index.ts"
+  },
+  "dependencies": {
+    "socket.io": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

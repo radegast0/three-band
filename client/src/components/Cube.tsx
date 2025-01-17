@@ -2,7 +2,7 @@ import React from "react";
 
 interface CubeProps {
   color?: string;
-  position?: [number, number, number]; 
+  position?: [number, number, number];
 }
 
 const Cube: React.FC<CubeProps> = ({
@@ -10,7 +10,7 @@ const Cube: React.FC<CubeProps> = ({
   position = [0, 0, 0],
 }) => {
   return (
-    <mesh position={position}>
+    <mesh castShadow position={position}>
       <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color={color} />
     </mesh>
