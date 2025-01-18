@@ -1,38 +1,48 @@
 import { useEffect } from "react";
 import { io } from "socket.io-client";
-import useUserStore from "../store";
+import useUserStore, { User } from "../store";
 
-export const socket = io("http://localhost:3001");
+interface SocketManagerProps {
+  onJoinRoom: (roomId: string) => void;
+}
 
-export const SocketManager = () => {
+export const socket = io("http://localhost:3001", {
+  reconnectionAttempts: 5,
+  reconnectionDelay: 2000,
+});
+
+export const SocketManager: React.FC<SocketManagerProps> = ({ onJoinRoom }) => {
   const { setUsers } = useUserStore();
+
   useEffect(() => {
     function onConnect() {
       console.log("Connected");
-      socket.emit("hello");
     }
+
     function onDisconnect() {
       console.log("Disconnected");
     }
 
-    function onHello() {
-      console.log("Received hello");
+    function onUsers(value: User[]) {
+      setUsers(value);
     }
 
-    function onUsers(value: any) {
-      setUsers(value);
+    function onUserJoined(roomId: string) {
+      onJoinRoom(roomId);
     }
 
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
-    socket.on("hello", onHello);
     socket.on("users", onUsers);
+    socket.on("userJoined", onUserJoined);
 
     return () => {
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
-      socket.off("hello", onHello);
+      socket.off("users", onUsers);
+      socket.off("userJoined", onUserJoined);
     };
-  }, []);
+  }, [setUsers, onJoinRoom]);
+
   return null;
 };
