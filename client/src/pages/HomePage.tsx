@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
-import { socket } from "./components/SocketManager";
+import { socket } from "../hooks/socketClient";
+import { Button } from "../components/ui/button";
+import { Room } from "@shared/Room";
 
 const HomePage = () => {
   const [roomId, setRoomId] = useState("");
   const [password, setPassword] = useState("");
-  interface Room {
-    id: string;
-    userCount: number;
-  }
 
   const [availableRooms, setAvailableRooms] = useState<Room[]>([]);
 
@@ -48,9 +46,7 @@ const HomePage = () => {
         onChange={(e) => setPassword(e.target.value)}
         className="border p-2 mb-4"
       />
-      <button onClick={createRoom} className="bg-blue-500 text-white p-2 mb-2">
-        Create Room
-      </button>
+      <Button onClick={createRoom}>Create Room</Button>
       <h2 className="text-xl mb-2">Available Rooms:</h2>
       <ul>
         {availableRooms.map((room) => (

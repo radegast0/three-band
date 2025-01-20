@@ -1,15 +1,11 @@
 import { useEffect } from "react";
-import { io } from "socket.io-client";
-import useUserStore, { User } from "../store";
+import { socket } from "../hooks/socketClient";
+import useUserStore from "../store";
+import { User } from "@shared/User";
 
 interface SocketManagerProps {
   onJoinRoom: (roomId: string) => void;
 }
-
-export const socket = io("http://localhost:3001", {
-  reconnectionAttempts: 5,
-  reconnectionDelay: 2000,
-});
 
 export const SocketManager: React.FC<SocketManagerProps> = ({ onJoinRoom }) => {
   const { setUsers } = useUserStore();

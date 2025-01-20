@@ -1,10 +1,12 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Cube from "./components/Cube";
-import { socket, SocketManager } from "./components/SocketManager";
-import useUserStore, { User } from "./store";
+import { SocketManager } from "./components/SocketManager";
+import { socket } from "./hooks/socketClient";
+import useUserStore from "./store";
 import { useState } from "react";
-import HomePage from "./HomePage";
+import HomePage from "./pages/HomePage";
+import { User } from "@shared/User";
 
 export default function App() {
   const users = useUserStore((state) => state.users);

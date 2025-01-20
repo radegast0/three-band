@@ -1,4 +1,5 @@
 import { Server } from "socket.io";
+import { User } from "../types/User";
 
 const io = new Server({
   cors: {
@@ -7,13 +8,6 @@ const io = new Server({
 });
 
 io.listen(3001);
-
-interface User {
-  id: string;
-  position: [number, number, number];
-  color: string;
-  roomId: string;
-}
 
 const users = new Map<string, User>();
 const rooms = new Map();

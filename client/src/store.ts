@@ -1,16 +1,5 @@
 import { create } from "zustand";
-
-export type User = {
-  id: string;
-  position: [number, number, number];
-  color: string;
-  roomId: string;
-};
-
-type Store = {
-  users: User[];
-  setUsers: (users: User[]) => void;
-};
+import { Store } from "@shared/Store";
 
 const useUserStore = create<Store>((set) => ({
   users: [],
