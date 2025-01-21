@@ -1,21 +1,40 @@
 import { useState, useEffect } from "react";
-import { socket } from "../hooks/socketClient";
+import { socket } from "../lib/socketClient";
 import { Button } from "../components/ui/button";
 import { Room } from "@shared/Room";
 
-const HomePage = () => {
+const Home = () => {
   const [roomId, setRoomId] = useState("");
   const [password, setPassword] = useState("");
 
   const [availableRooms, setAvailableRooms] = useState<Room[]>([]);
 
   useEffect(() => {
+    // Request available rooms when the component mounts
+    socket.emit("getAvailableRooms");
+
+    // Listen for availableRooms event
     socket.on("availableRooms", (rooms) => {
       setAvailableRooms(rooms);
     });
 
+    socket.on("roomUserCountUpdated", ({ roomId, userCount }) => {
+      setAvailableRooms((prevRooms) =>
+        prevRooms.map((room) =>
+          room.id === roomId ? { ...room, userCount } : room
+        )
+      );
+    });
+
+    socket.on("roomDeleted", (deletedRoomId) => {
+      setAvailableRooms((prevRooms) =>
+        prevRooms.filter((room) => room.id !== deletedRoomId)
+      );
+    });
+
     return () => {
       socket.off("availableRooms");
+      socket.off("roomUserCountUpdated");
     };
   }, []);
 
@@ -67,4 +86,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;

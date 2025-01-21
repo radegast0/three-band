@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { socket } from "../hooks/socketClient";
+import { socket } from "@/lib/socketClient";
 import useUserStore from "../store";
 import { User } from "@shared/User";
 
