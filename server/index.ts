@@ -104,6 +104,7 @@ io.on("connection", (socket) => {
     updateRoomUserCount(roomId);
 
     emitRoomUsers(roomId);
+    emitAvailableRooms();
     socket.emit("userJoined", roomId);
   });
 
@@ -112,6 +113,20 @@ io.on("connection", (socket) => {
       (user) => user.roomId === roomId
     );
     io.to(roomId).emit("users", roomUsers);
+  };
+
+  const emitAvailableRooms = () => {
+    io.emit(
+      "availableRooms",
+      Array.from(rooms.entries()).map(([id, room]) => ({
+        id,
+        userCount: room.users.size,
+        users: Array.from(room.users).map((userId) => ({
+          username: users.get(userId)?.username || "Unknown",
+        })),
+        hasPassword: !!room.password,
+      }))
+    );
   };
 
   socket.on("move", (position: [number, number, number]) => {
@@ -139,5 +154,6 @@ io.on("connection", (socket) => {
       emitRoomUsers(user.roomId);
       console.log("Disconnected:", socket.id);
     }
+    emitAvailableRooms();
   });
 });
