@@ -44,7 +44,12 @@ io.on("connection", (socket) => {
     }
   };
 
-  socket.on("createRoom", ({ roomId, password }) => {
+  socket.on("createRoom", ({ roomId, password, username }) => {
+    if (rooms.has(roomId)) {
+      socket.emit("roomError", "Room already exists");
+      return;
+    }
+
     rooms.set(roomId, {
       users: new Set(),
       password: password || null,
@@ -54,6 +59,7 @@ io.on("connection", (socket) => {
 
     users.set(socket.id, {
       id: socket.id,
+      username: username || "Host",
       position: generateRandomPosition(),
       color: generateRandomHexColor(),
       roomId,
@@ -66,7 +72,7 @@ io.on("connection", (socket) => {
     socket.emit("userJoined", roomId);
   });
 
-  socket.on("joinRoom", ({ roomId, password }) => {
+  socket.on("joinRoom", ({ roomId, password, username }) => {
     const room = rooms.get(roomId);
     if (!room) {
       socket.emit("roomError", "Room not found");
@@ -82,6 +88,7 @@ io.on("connection", (socket) => {
 
     users.set(socket.id, {
       id: socket.id,
+      username: username || "Guest",
       position: generateRandomPosition(),
       color: generateRandomHexColor(),
       roomId,
