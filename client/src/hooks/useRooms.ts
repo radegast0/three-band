@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { socket } from "../lib/socketClient";
 import { Room } from "@shared/Room";
+import { User } from "@shared/User";
 
 const useRooms = () => {
   const [availableRooms, setAvailableRooms] = useState<Room[]>([]);
   const [roomId, setRoomId] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [roomUsers, setRoomUsers] = useState<User[]>([]);
 
   useEffect(() => {
     socket.emit("getAvailableRooms");
@@ -29,10 +31,19 @@ const useRooms = () => {
       );
     });
 
+    socket.on("users", (users: User[]) => {
+      setRoomUsers(users);
+      console.log(
+        "users in room",
+        users.map((user) => user.username)
+      );
+    });
+
     return () => {
       socket.off("roomDeleted");
       socket.off("availableRooms");
       socket.off("roomUserCountUpdated");
+      socket.off("users");
     };
   }, []);
 
@@ -56,6 +67,7 @@ const useRooms = () => {
     setUsername,
     createRoom,
     joinRoom,
+    roomUsers,
   };
 };
 

@@ -12,6 +12,7 @@ const Home = () => {
     setUsername,
     createRoom,
     joinRoom,
+    // roomUsers,
   } = useRooms();
 
   return (
@@ -44,7 +45,8 @@ const Home = () => {
         {availableRooms.map((room) => (
           <li key={room.id} className="flex justify-between items-center mb-2">
             <span>
-              {room.id} (Users: {room.userCount})
+              {room.id} ({room.userCount} Users:{" "}
+              {room.users.map((user) => user.username).join(", ")})
             </span>
             <button
               onClick={() => joinRoom(room.id)}
@@ -55,6 +57,7 @@ const Home = () => {
           </li>
         ))}
       </ul>
+      <h2 className="text-xl mt-4">Users in Room:</h2>
     </div>
   );
 };
