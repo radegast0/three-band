@@ -10,7 +10,10 @@ const io = new Server({
 io.listen(3001);
 
 const users = new Map<string, User>();
-const rooms = new Map();
+const rooms = new Map<
+  string,
+  { users: Set<string>; password: string | null }
+>();
 
 const generateRandomPosition = (): [number, number, number] => {
   return [Math.random() * 3, 0, Math.random() * 3];
@@ -24,6 +27,9 @@ const getAvailableRooms = () =>
   Array.from(rooms.entries()).map(([id, room]) => ({
     id,
     userCount: room.users.size,
+    users: Array.from(room.users).map((userId) => ({
+      username: users.get(userId)?.username || "Unknown",
+    })),
     hasPassword: !!room.password,
   }));
 
@@ -54,8 +60,9 @@ io.on("connection", (socket) => {
       users: new Set(),
       password: password || null,
     });
+
     socket.join(roomId);
-    rooms.get(roomId).users.add(socket.id);
+    rooms.get(roomId)!.users.add(socket.id);
 
     users.set(socket.id, {
       id: socket.id,
