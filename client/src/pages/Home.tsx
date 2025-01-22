@@ -40,7 +40,9 @@ const Home = () => {
         className="border p-2 mb-4"
       />
       <Button onClick={createRoom}>Create Room</Button>
-      <h2 className="text-xl mb-2">Available Rooms:</h2>
+      {availableRooms.length > 0 && (
+        <h2 className="text-xl mb-2">Available Rooms:</h2>
+      )}
       <ul>
         {availableRooms.map((room) => (
           <li key={room.id} className="flex justify-between items-center mb-2">
@@ -57,7 +59,6 @@ const Home = () => {
           </li>
         ))}
       </ul>
-      <h2 className="text-xl mt-4">Users in Room:</h2>
     </div>
   );
 };

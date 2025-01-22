@@ -7,6 +7,7 @@ import useUserStore from "./store";
 import { useState } from "react";
 import { User } from "@shared/User";
 import Home from "./pages/Home";
+import Experience from "./components/Experience";
 
 export default function App() {
   const users = useUserStore((state) => state.users);
@@ -19,7 +20,7 @@ export default function App() {
   return (
     <>
       <SocketManager onJoinRoom={handleJoinRoom} />
-      {!currentRoom ? (
+      {/* {!currentRoom ? (
         <Home />
       ) : (
         <div className="h-screen w-full">
@@ -41,7 +42,8 @@ export default function App() {
             ))}
           </Canvas>
         </div>
-      )}
+      )} */}
+      <Experience />
     </>
   );
 }
