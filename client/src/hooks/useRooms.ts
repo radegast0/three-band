@@ -39,12 +39,7 @@ const useRooms = () => {
       );
     });
 
-    socket.on("modelClicked", (message: string) => {
-      console.log(message);
-    });
-
     return () => {
-      socket.off("modelClicked");
       socket.off("roomDeleted");
       socket.off("availableRooms");
       socket.off("roomUserCountUpdated");
