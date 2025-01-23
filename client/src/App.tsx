@@ -20,11 +20,11 @@ export default function App() {
   return (
     <>
       <SocketManager onJoinRoom={handleJoinRoom} />
-      {/* {!currentRoom ? (
+      {!currentRoom ? (
         <Home />
       ) : (
         <div className="h-screen w-full">
-          <Canvas shadows camera={{ position: [1, 2, 3] }}>
+          {/* <Canvas shadows camera={{ position: [1, 2, 3] }}>
             <directionalLight castShadow position={[2, 5, 2]} intensity={0.5} />
             <ambientLight intensity={0.5} />
             <OrbitControls />
@@ -40,10 +40,10 @@ export default function App() {
             {users.map((user: User) => (
               <Cube key={user.id} position={user.position} color={user.color} />
             ))}
-          </Canvas>
+          </Canvas> */}
+          <Experience />
         </div>
-      )} */}
-      <Experience />
+      )}
     </>
   );
 }

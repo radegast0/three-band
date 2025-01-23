@@ -137,6 +137,16 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("modelClicked", ({ userId }) => {
+    const user = users.get(userId);
+    if (user) {
+      const message = `${user.username} clicked the model`;
+      io.to(user.roomId).emit("modelClicked", message);
+      emitRoomUsers(user.roomId);
+      console.log(message);
+    }
+  });
+
   socket.on("disconnect", () => {
     const user = users.get(socket.id);
     if (user) {

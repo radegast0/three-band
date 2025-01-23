@@ -9,6 +9,7 @@ Title: Drum Kit
 import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
+import { socket } from "@/lib/socketClient";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -32,6 +33,11 @@ type GLTFResult = GLTF & {
 
 export default function Drum(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/drum_kit.glb") as GLTFResult;
+
+  const handleClick = () => {
+    socket.emit("modelClicked", { userId: socket.id });
+  };
+
   return (
     <group {...props} dispose={null}>
       <group scale={100}>
@@ -77,6 +83,7 @@ export default function Drum(props: JSX.IntrinsicElements["group"]) {
         material={materials.lambert1}
       />
       <mesh
+        onClick={handleClick}
         castShadow
         receiveShadow
         geometry={nodes.polySurface1387_lambert2_0.geometry}
