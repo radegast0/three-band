@@ -29,16 +29,18 @@ export const SocketManager: React.FC<SocketManagerProps> = ({ onJoinRoom }) => {
       onJoinRoom(roomId);
     }
 
-    socket.on("roomError", (errorMessage) => {
-      console.error(errorMessage);
-    });
+    function onModelClicked(message: string) {
+      console.log(message);
+    }
+
+    socket.on("modelClicked", onModelClicked);
     socket.on("connect", onConnect);
     socket.on("disconnect", onDisconnect);
     socket.on("users", onUsers);
     socket.on("userJoined", onUserJoined);
 
     return () => {
-      socket.off("roomError");
+      socket.off("modelClicked", onModelClicked);
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
       socket.off("users", onUsers);
