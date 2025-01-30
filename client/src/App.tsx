@@ -28,23 +28,6 @@ export default function App() {
         </>
       ) : (
         <div className="h-screen w-full">
-          {/* <Canvas shadows camera={{ position: [1, 2, 3] }}>
-            <directionalLight castShadow position={[2, 5, 2]} intensity={0.5} />
-            <ambientLight intensity={0.5} />
-            <OrbitControls />
-            <mesh
-              onClick={(e) => socket.emit("move", [e.point.x, 0, e.point.z])}
-              receiveShadow
-              rotation={[-Math.PI / 2, 0, 0]}
-              position={[0, -0.5, 0]}
-            >
-              <planeGeometry args={[50, 50]} />
-              <meshStandardMaterial color="lightblue" />
-            </mesh>
-            {users.map((user: User) => (
-              <Cube key={user.id} position={user.position} color={user.color} />
-            ))}
-          </Canvas> */}
           <Experience />
         </div>
       )}
