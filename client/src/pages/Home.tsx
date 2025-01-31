@@ -1,4 +1,3 @@
-import { Button } from "../components/ui/button";
 import useRooms from "@/hooks/useRooms";
 
 const Home = () => {
@@ -40,9 +39,9 @@ const Home = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full p-3 mb-6 bg-gray-700 border border-gray-600 rounded text-white placeholder-gray-400"
         />
-        <Button className="w-full mb-4" onClick={createRoom}>
+        <button className="w-full mb-4" onClick={createRoom}>
           Create Room
-        </Button>
+        </button>
         {availableRooms.length > 0 && (
           <h2 className="text-xl font-semibold mb-4">Available Rooms:</h2>
         )}
@@ -56,9 +55,9 @@ const Home = () => {
                 {room.id} ({room.userCount} Users:{" "}
                 {room.users.map((user) => user.username).join(", ")})
               </span>
-              <Button variant="secondary" onClick={() => joinRoom(room.id)}>
+              <button  onClick={() => joinRoom(room.id)}>
                 Join
-              </Button>
+              </button>
             </li>
           ))}
         </ul>

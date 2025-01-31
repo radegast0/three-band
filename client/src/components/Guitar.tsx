@@ -8,15 +8,13 @@ Title: Guitar Hero Controller
 import { Group, MathUtils, Mesh, MeshStandardMaterial } from 'three';
 import React, { useEffect, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useGLTF } from '@react-three/drei';
+import { Outlines, useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import useUserStore from '@/store';
 
 type GLTFResult = GLTF & {
   nodes: {
     Object_2: Mesh;
-    Object_3: Mesh;
-    Object_4: Mesh;
     Key1Outer: Mesh;
     Key1Inner: Mesh;
     Key2Outer: Mesh;
@@ -37,6 +35,14 @@ type GLTFResult = GLTF & {
 export default function Guitar(props: JSX.IntrinsicElements['group']) {
   const isSinglePlayer = useUserStore((state) => state.isSinglePlayer);
   const guitarRef = useRef<Group>(null);
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handlePointerDown = () => {
+    setIsHovering(true);
+  };
+  const handlePointerOut = () => {
+    setIsHovering(false);
+  };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -51,7 +57,7 @@ export default function Guitar(props: JSX.IntrinsicElements['group']) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const { nodes, materials } = useGLTF('/untitled.glb') as GLTFResult;
+  const { nodes, materials } = useGLTF('/untitled2.glb') as GLTFResult;
 
   const keyNames = ['Key1', 'Key2', 'Key3', 'Key4', 'Key5'] as const;
   type KeyName = (typeof keyNames)[number];
@@ -99,33 +105,42 @@ export default function Guitar(props: JSX.IntrinsicElements['group']) {
   });
 
   return (
-    <group {...props} ref={guitarRef} dispose={null}>
-      <mesh geometry={nodes.Object_2.geometry} material={materials.Material__26} />
-      <mesh geometry={nodes.Object_3.geometry} material={materials.Material__26} />
-      <mesh geometry={nodes.Object_4.geometry} material={materials.Material__26} />
+    <>
+      <group {...props} ref={guitarRef} dispose={null}>
+        <mesh
+          onPointerEnter={handlePointerDown}
+          onPointerLeave={handlePointerOut}
+          geometry={nodes.Object_2.geometry}
+          material={materials.Material__26}
+        >
+          {isHovering && <Outlines thickness={2} color={'white'} />}
+        </mesh>
+        {/* <mesh geometry={nodes.Object_3.geometry} material={materials.Material__26} /> */}
+        {/* <mesh geometry={nodes.Object_4.geometry} material={materials.Material__26} /> */}
 
-      {keyNames.map((key, index) => (
-        <group key={key} ref={keyRefs[key]} position={keyPositions[key]}>
-          <mesh
-            name={`${key}Outer`}
-            castShadow
-            receiveShadow
-            geometry={nodes[`${key}Outer`].geometry}
-            onClick={() => handleKeyPress(key)}
-          >
-            <meshBasicMaterial color={['orange', 'blue', 'yellow', 'red', 'green'][index]} />
-          </mesh>
+        {keyNames.map((key, index) => (
+          <group key={key} ref={keyRefs[key]} position={keyPositions[key]}>
+            <mesh
+              name={`${key}Outer`}
+              castShadow
+              receiveShadow
+              geometry={nodes[`${key}Outer`].geometry}
+              onClick={() => handleKeyPress(key)}
+            >
+              <meshBasicMaterial color={['orange', 'blue', 'yellow', 'red', 'green'][index]} />
+            </mesh>
 
-          <mesh
-            onClick={() => handleKeyPress(key)}
-            name={`${key}Inner`}
-            geometry={nodes[`${key}Inner`].geometry}
-            material={materials['Material.001']}
-          />
-        </group>
-      ))}
-    </group>
+            <mesh
+              onClick={() => handleKeyPress(key)}
+              name={`${key}Inner`}
+              geometry={nodes[`${key}Inner`].geometry}
+              material={materials['Material.001']}
+            />
+          </group>
+        ))}
+      </group>
+    </>
   );
 }
 
-useGLTF.preload('/untitled.glb');
+useGLTF.preload('/untitled2.glb');
