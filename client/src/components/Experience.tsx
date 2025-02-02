@@ -5,6 +5,8 @@ import { useControls } from 'leva';
 import Guitar from './Guitar';
 import Model from './Model';
 import Orchestra from './Orchestra';
+import Altar from './Altar';
+import Lights from './Lights';
 
 const Experience = () => {
   const environments = {
@@ -20,7 +22,7 @@ const Experience = () => {
 
   return (
     <div className="h-dvh w-dvw">
-      <Canvas camera={{ position: [0, 0, 8] }}>
+      <Canvas camera={{ position: [0, 4, 8], fov: 75 }}>
         {/* <color attach="background" args={["#0f0f0f"]} />
         <directionalLight intensity={1} position={[0, 5, 0]} />
         <Environment
@@ -32,9 +34,11 @@ const Experience = () => {
         <Guitar position={[0, 0, 0]} rotation={[0,0,Math.PI/2]} scale={.02} />
         <Guitar position={[4, 0, 0]} rotation={[0,0,Math.PI/2]} scale={.02} /> */}
 
-        <Environment files={environments[environment]} />
+        {/* <Environment environmentIntensity={0.2} files={environments[environment]} /> */}
         <OrbitControls />
-        <Model scale={0.5} />
+        <Altar rotation={[0,-Math.PI/2,0]} />
+        <Lights />
+        {/* <Model scale={0.5} /> */}
         {/* <Orchestra /> */}
       </Canvas>
     </div>
