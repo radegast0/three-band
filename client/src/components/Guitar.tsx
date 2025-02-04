@@ -34,15 +34,6 @@ type GLTFResult = GLTF & {
 
 export default function Guitar(props: JSX.IntrinsicElements['group']) {
   const isSinglePlayer = useUserStore((state) => state.isSinglePlayer);
-  const guitarRef = useRef<Group>(null);
-  const [isHovering, setIsHovering] = useState(false);
-
-  const handlePointerDown = () => {
-    setIsHovering(true);
-  };
-  const handlePointerOut = () => {
-    setIsHovering(false);
-  };
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -106,17 +97,8 @@ export default function Guitar(props: JSX.IntrinsicElements['group']) {
 
   return (
     <>
-      <group {...props} ref={guitarRef} dispose={null}>
-        <mesh
-          onPointerEnter={handlePointerDown}
-          onPointerLeave={handlePointerOut}
-          geometry={nodes.Object_2.geometry}
-          material={materials.Material__26}
-        >
-          {isHovering && <Outlines thickness={2} color={'white'} />}
-        </mesh>
-        {/* <mesh geometry={nodes.Object_3.geometry} material={materials.Material__26} /> */}
-        {/* <mesh geometry={nodes.Object_4.geometry} material={materials.Material__26} /> */}
+      <group {...props} dispose={null}>
+        <mesh geometry={nodes.Object_2.geometry} material={materials.Material__26} />
 
         {keyNames.map((key, index) => (
           <group key={key} ref={keyRefs[key]} position={keyPositions[key]}>

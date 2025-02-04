@@ -1,5 +1,4 @@
 import { useHelper } from '@react-three/drei';
-import React from 'react';
 import { useRef } from 'react';
 import { PointLight, PointLightHelper } from 'three';
 
@@ -10,14 +9,16 @@ const Lights = () => {
   useHelper(pointLight2, PointLightHelper, 0.3);
   return (
     <>
-      <ambientLight intensity={0.5} />
+      {/* <ambientLight intensity={1} /> */}
 
-      <pointLight ref={pointLight} position={[1.94, 2.3, 0.4]} intensity={10} color={'yellow'} />
-      <pointLight ref={pointLight2} position={[-2.25, 2.8, -0.75]} intensity={10} color={'yellow'} />
+      <pointLight ref={pointLight} position={[2.6, 2.1, 1.6]} intensity={50} color={'#F9CB43'} />
+      <pointLight ref={pointLight2} position={[-3.6, 3.6, 1.1]} intensity={50} color={'#F9CB43'} />
 
-      <directionalLight intensity={1} position={[0, 2, 5]} color={"yellow"} />
+      <directionalLight intensity={2} position={[0, 2, 5]} color={'red'} />
+      <directionalLight intensity={.5} position={[0, 10, -1]} color={'white'} />
+      <directionalLight intensity={.5} position={[0, 1, 5]} color={'white'} />
 
-      <hemisphereLight intensity={2} />
+      {/* <hemisphereLight intensity={2} /> */}
     </>
   );
 };
