@@ -1,16 +1,21 @@
 import { Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerFooter, useDisclosure, Input } from '@heroui/react';
 import Button from './Button';
 import useRooms from '@/hooks/useRooms';
+import useUserStore from '@/store';
 
 const Draver = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { availableRooms, roomId, setRoomId, password, setPassword, username, setUsername, createRoom, joinRoom } =
     useRooms();
+  const setIsSinglePlayer = useUserStore((state) => state.setIsSinglePlayer);
 
   return (
     <>
       <div className="flex gap-x-4 text-foreground dark">
-        <Button className="h-36 w-56 rounded-lg backdrop-blur-xl transition-colors duration-200 hover:bg-red-800">
+        <Button
+          onClick={() => setIsSinglePlayer(true)}
+          className="h-36 w-56 rounded-lg backdrop-blur-xl transition-colors duration-200 hover:bg-red-800"
+        >
           Solo Stage
         </Button>
         <Button
