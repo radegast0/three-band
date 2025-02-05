@@ -3,6 +3,7 @@ import { OrbitControls, Stats } from '@react-three/drei';
 import Guitar from './Guitar';
 import Lights from './Lights';
 import Altar from './Altar';
+import Vinyls from './Vinyls';
 
 const Experience = () => {
   return (
@@ -13,6 +14,7 @@ const Experience = () => {
         <OrbitControls />
         <Altar position={[0, -2, 0]} scale={0.5} />
         <Lights />
+        <Vinyls position={[0, -2, 0]} scale={0.5} />
         <Stats />
       </Canvas>
     </div>
