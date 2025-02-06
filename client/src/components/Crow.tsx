@@ -30,7 +30,6 @@ export default function Crow({ onHide, ...props }: JSX.IntrinsicElements['group'
   const isSinglePlayer = useUserStore((state) => state.isSinglePlayer);
 
   mixer.addEventListener('finished', () => setVisible(false));
-  console.log(visible);
 
   useEffect(() => {
     if (actions) {
@@ -53,7 +52,6 @@ export default function Crow({ onHide, ...props }: JSX.IntrinsicElements['group'
     }
   }, [actions, isSinglePlayer]);
 
-  console.log(actions);
   return (
     <group ref={group} {...props} dispose={null}>
       <group name="Sketchfab_Scene">

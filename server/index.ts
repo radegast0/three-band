@@ -147,7 +147,25 @@ io.on("connection", (socket) => {
     }
   });
 
-  
+  socket.on("leaveRoom", ({ roomId }) => {
+    const user = users.get(socket.id);
+    if (user && user.roomId === roomId) {
+      const room = rooms.get(roomId);
+      if (room) {
+        room.users.delete(socket.id);
+        if (room.users.size === 0) {
+          rooms.delete(roomId);
+          io.emit("roomDeleted", roomId);
+        } else {
+          updateRoomUserCount(roomId);
+        }
+      }
+      users.delete(socket.id);
+      socket.leave(roomId);
+      emitRoomUsers(roomId);
+      emitAvailableRooms();
+    }
+  });
 
   socket.on("disconnect", () => {
     const user = users.get(socket.id);
