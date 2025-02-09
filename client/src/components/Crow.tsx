@@ -8,9 +8,10 @@ Title: Crow All animation Little Nightmares 2
 
 import * as THREE from 'three';
 import { useEffect, useRef, useState } from 'react';
-import { useGLTF, useAnimations } from '@react-three/drei';
+import { useGLTF, useAnimations, useCamera } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import useUserStore from '@/store';
+import { useFrame, useThree } from '@react-three/fiber';
 
 type GLTFResult = GLTF & {
   nodes: {

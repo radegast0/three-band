@@ -1,5 +1,6 @@
 import { useHelper } from '@react-three/drei';
-import { useRef } from 'react';
+import { useThree } from '@react-three/fiber';
+import { useEffect, useRef } from 'react';
 import { PointLight, PointLightHelper } from 'three';
 
 const Lights = () => {
@@ -7,6 +8,12 @@ const Lights = () => {
   const pointLight2 = useRef<PointLight>(null!);
   useHelper(pointLight, PointLightHelper, 0.3);
   useHelper(pointLight2, PointLightHelper, 0.3);
+
+  const { gl } = useThree();
+  useEffect(() => {
+    console.log(gl);
+  }, [gl]);
+
   return (
     <>
       {/* <ambientLight intensity={1} /> */}
@@ -15,8 +22,8 @@ const Lights = () => {
       <pointLight ref={pointLight2} position={[-3.6, 3.6, 1.1]} intensity={50} color={'#F9CB43'} />
 
       <directionalLight intensity={2} position={[0, 2, 5]} color={'red'} />
-      <directionalLight intensity={.5} position={[0, 10, -1]} color={'white'} />
-      <directionalLight intensity={.5} position={[0, 1, 5]} color={'white'} />
+      <directionalLight intensity={0.5} position={[0, 10, -1]} color={'white'} />
+      <directionalLight intensity={0.5} position={[0, 1, 5]} color={'white'} />
 
       {/* <hemisphereLight intensity={2} /> */}
     </>
