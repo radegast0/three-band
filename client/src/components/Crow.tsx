@@ -8,10 +8,9 @@ Title: Crow All animation Little Nightmares 2
 
 import * as THREE from 'three';
 import { useEffect, useRef, useState } from 'react';
-import { useGLTF, useAnimations, useCamera } from '@react-three/drei';
+import { useGLTF, useAnimations } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
 import useUserStore from '@/store';
-import { useFrame, useThree } from '@react-three/fiber';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -27,7 +26,7 @@ export default function Crow({ onHide, ...props }: JSX.IntrinsicElements['group'
   const group = useRef<THREE.Group>(null);
   const { nodes, materials, animations } = useGLTF('/models/crow_all_animation_little_nightmares_2.glb') as GLTFResult;
   const { actions, mixer } = useAnimations(animations, group);
-  const [visible, setVisible] = useState(true);
+  const [, setVisible] = useState(true);
   const isSinglePlayer = useUserStore((state) => state.isSinglePlayer);
 
   mixer.addEventListener('finished', () => setVisible(false));

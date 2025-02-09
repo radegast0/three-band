@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 :root {
-  @apply overflow-hidden;
+  @apply overflow-hidden select-none;
 }

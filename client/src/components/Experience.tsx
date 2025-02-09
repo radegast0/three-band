@@ -1,5 +1,5 @@
 import { Canvas } from '@react-three/fiber';
-import { CameraControls, OrbitControls, Stats } from '@react-three/drei';
+import { OrbitControls, Stats } from '@react-three/drei';
 import Guitar from './Guitar';
 import Lights from './Lights';
 import Altar from './Altar';
