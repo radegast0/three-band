@@ -34,6 +34,8 @@ export default function Vinyls(props: JSX.IntrinsicElements['group']) {
   const judasPriest = useTexture('/assets/judas-priest.jpeg');
   const motorhead = useTexture('/assets/motorhead.jpeg');
   const megadeth = useTexture('/assets/megadeth.jpeg');
+  const blackSabbath = useTexture('/assets/black-sabbath.jpeg');
+  const dio = useTexture('/assets/dio.jpeg');
 
   megadeth.flipY = false;
   judasPriest.flipY = false;
@@ -41,13 +43,9 @@ export default function Vinyls(props: JSX.IntrinsicElements['group']) {
 
   return (
     <group {...props} dispose={null}>
-      <mesh
-        name="disk_inner2"
-        castShadow
-        receiveShadow
-        geometry={nodes.disk_inner2.geometry}
-        material={nodes.disk_inner2.material}
-      />
+      <mesh name="disk_inner2" castShadow receiveShadow geometry={nodes.disk_inner2.geometry}>
+        <meshBasicMaterial map={blackSabbath} />
+      </mesh>
       <mesh
         name="#REC0002_33_Highway_To_Hell_#REC0002_Textures_0"
         castShadow
@@ -90,8 +88,10 @@ export default function Vinyls(props: JSX.IntrinsicElements['group']) {
         castShadow
         receiveShadow
         geometry={nodes.disk_inner1.geometry}
-        material={nodes.disk_inner1.material}
-      />
+        // material={nodes.disk_inner1.material}
+      >
+        <meshBasicMaterial map={dio} />
+      </mesh>
       <mesh
         name="#REC0002_33_Highway_To_Hell_#REC0002_Textures_0001"
         castShadow
@@ -99,13 +99,9 @@ export default function Vinyls(props: JSX.IntrinsicElements['group']) {
         geometry={nodes['#REC0002_33_Highway_To_Hell_#REC0002_Textures_0001'].geometry}
         material={materials.REC0002_Textures}
       />
-      <mesh
-        name="vinyl_face2"
-        castShadow
-        receiveShadow
-        geometry={nodes.vinyl_face2.geometry}
-        material={nodes.vinyl_face2.material}
-      />
+      <mesh name="vinyl_face2" castShadow receiveShadow geometry={nodes.vinyl_face2.geometry}>
+        <meshBasicMaterial map={dio} />
+      </mesh>
       <mesh
         name="vinyl_box_face005"
         castShadow
@@ -113,13 +109,9 @@ export default function Vinyls(props: JSX.IntrinsicElements['group']) {
         geometry={nodes.vinyl_box_face005.geometry}
         material={materials.dit2}
       />
-      <mesh
-        name="vinyl_face5"
-        castShadow
-        receiveShadow
-        geometry={nodes.vinyl_face5.geometry}
-        material={nodes.vinyl_face5.material}
-      />
+      <mesh name="vinyl_face5" castShadow receiveShadow geometry={nodes.vinyl_face5.geometry}>
+        <meshBasicMaterial map={blackSabbath} />
+      </mesh>
       <mesh
         name="vinyl_box_face006"
         castShadow

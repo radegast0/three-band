@@ -49,7 +49,7 @@ export default function Guitar(props: JSX.IntrinsicElements['group']) {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const { nodes, materials } = useGLTF('/untitled2.glb') as GLTFResult;
+  const { nodes, materials } = useGLTF('./models/untitled2.glb') as GLTFResult;
 
   const keyNames = ['Key1', 'Key2', 'Key3', 'Key4', 'Key5'] as const;
   type KeyName = (typeof keyNames)[number];
@@ -126,4 +126,4 @@ export default function Guitar(props: JSX.IntrinsicElements['group']) {
   );
 }
 
-useGLTF.preload('/untitled2.glb');
+useGLTF.preload('./models/untitled2.glb');

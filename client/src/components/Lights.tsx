@@ -1,18 +1,12 @@
-import { useHelper } from '@react-three/drei';
-import { useThree } from '@react-three/fiber';
-import { useEffect, useRef } from 'react';
-import { PointLight, PointLightHelper } from 'three';
+// import { useHelper } from '@react-three/drei';
+import { useRef } from 'react';
+import { PointLight} from 'three';
 
 const Lights = () => {
   const pointLight = useRef<PointLight>(null!);
   const pointLight2 = useRef<PointLight>(null!);
-  useHelper(pointLight, PointLightHelper, 0.3);
-  useHelper(pointLight2, PointLightHelper, 0.3);
-
-  const { gl } = useThree();
-  useEffect(() => {
-    console.log(gl);
-  }, [gl]);
+  // useHelper(pointLight, PointLightHelper, 0.3);
+  // useHelper(pointLight2, PointLightHelper, 0.3);
 
   return (
     <>

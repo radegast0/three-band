@@ -27,7 +27,7 @@ type GLTFResult = GLTF & {
 };
 
 export default function Altar(props: JSX.IntrinsicElements['group']) {
-  const { nodes, materials } = useGLTF('/altar-merged.glb') as GLTFResult;
+  const { nodes, materials } = useGLTF('./models/altar-merged.glb') as GLTFResult;
   return (
     <>
       <Lanterns position={[0, -2, 0]} scale={0.5} />
@@ -66,4 +66,4 @@ export default function Altar(props: JSX.IntrinsicElements['group']) {
   );
 }
 
-useGLTF.preload('/altar-merged.glb');
+useGLTF.preload('./models/altar-merged.glb');

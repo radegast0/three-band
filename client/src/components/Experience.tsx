@@ -4,12 +4,11 @@ import Guitar from './Guitar';
 import Lights from './Lights';
 import Altar from './Altar';
 import Vinyls from './Vinyls';
-import Crow from './Crow';
-import { useState } from 'react';
 import useUserStore from '@/store';
+import Poster from './Poster';
+import { Suspense } from 'react';
 
 const Experience = () => {
-  const [isCrowVisible, setIsCrowVisible] = useState(true);
   const isSinglePlayer = useUserStore((state) => state.isSinglePlayer);
 
   return (
@@ -18,9 +17,11 @@ const Experience = () => {
         <color attach="background" args={['#3D0301']} />
 
         <OrbitControls />
+
         <Altar position={[0, -2, 0]} scale={0.5} />
         <Lights />
         <Vinyls position={[0, -2, 0]} scale={0.5} />
+        <Poster position={[0, -2, 0]} scale={0.5} />
 
         {/* tsl fog */}
         <mesh position={[0, -2, 0]}>
@@ -28,15 +29,14 @@ const Experience = () => {
           <meshBasicMaterial wireframe color="#3D0301" />
         </mesh>
 
-
         {/* <Crow position={[-3, 0.7, 4]} scale={1} /> */}
 
-        {isSinglePlayer && <Guitar position={[0, 4, 4]} rotation={[0, 0, Math.PI / 2]} scale={0.02} />}
-        {isCrowVisible && (
-          <>
-            <Crow position={[-3, 0.7, 4]} scale={1} onHide={() => setIsCrowVisible(false)} />
-          </>
+        {isSinglePlayer && (
+          <Suspense fallback={null}>
+            <Guitar position={[0, 4, 4]} rotation={[0, 0, Math.PI / 2]} scale={0.02} />
+          </Suspense>
         )}
+
         <Stats />
       </Canvas>
     </div>

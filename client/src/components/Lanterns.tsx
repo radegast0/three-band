@@ -14,7 +14,7 @@ type GLTFResult = GLTF & {
 };
 
 export default function Lanterns(props: JSX.IntrinsicElements['group']) {
-  const { nodes } = useGLTF('/lanterns.glb') as unknown as GLTFResult;
+  const { nodes } = useGLTF('./models/lanterns.glb') as unknown as GLTFResult;
   return (
     <group {...props} dispose={null}>
       <mesh castShadow receiveShadow geometry={nodes.defaultMaterial003.geometry}>
@@ -27,4 +27,4 @@ export default function Lanterns(props: JSX.IntrinsicElements['group']) {
   );
 }
 
-useGLTF.preload('/lanterns.glb');
+useGLTF.preload('./models/lanterns.glb');
