@@ -27,10 +27,14 @@ const useRooms = () => {
 
     socket.on('users', (users: User[]) => {
       setRoomUsers(users);
-      console.log(
-        'users in room',
-        users.map((user) => user.username)
-      );
+      // console.log(
+      //   'users in room',
+      //   users.map((user) => user.username)
+      // );
+    });
+
+    socket.on('roomError', (error) => {
+      console.log(error);
     });
 
     return () => {
@@ -38,13 +42,12 @@ const useRooms = () => {
       socket.off('availableRooms');
       socket.off('roomUserCountUpdated');
       socket.off('users');
+      socket.off('roomError');
     };
   }, []);
 
   const createRoom = () => {
-    if (roomId) {
-      socket.emit('createRoom', { roomId, password, username });
-    }
+    socket.emit('createRoom', { roomId, password, username });
   };
 
   const joinRoom = (roomId: string) => {

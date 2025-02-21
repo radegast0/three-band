@@ -51,6 +51,10 @@ io.on("connection", (socket) => {
   };
 
   socket.on("createRoom", ({ roomId, password, username }) => {
+    if (!roomId) {
+      socket.emit("roomError", "Room ID is required");
+      return;
+    }
     if (rooms.has(roomId)) {
       socket.emit("roomError", "Room already exists");
       return;
