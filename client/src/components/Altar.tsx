@@ -30,7 +30,7 @@ export default function Altar(props: JSX.IntrinsicElements['group']) {
   const { nodes, materials } = useGLTF('./models/altar-merged.glb') as GLTFResult;
   return (
     <>
-      <Lanterns position={[0, -2, 0]} scale={0.5} />
+      <Lanterns />
 
       <group {...props} dispose={null}>
         <group position={[0.513, 11.464, -1.012]} rotation={[-0.451, 0.171, 0.106]} scale={2.979}>

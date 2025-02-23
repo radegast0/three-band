@@ -10,7 +10,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 import { GLTF } from 'three-stdlib';
-import useUserStore from '@/store';
+// import useUserStore from '@/store';
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -33,8 +33,8 @@ type GLTFResult = GLTF & {
 };
 
 export default function Guitar(props: JSX.IntrinsicElements['group']) {
-  const isSinglePlayer = useUserStore((state) => state.isSinglePlayer);
-  console.log(isSinglePlayer);
+  // const isSinglePlayer = useUserStore((state) => state.isSinglePlayer);
+  // console.log(isSinglePlayer);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
