@@ -1,14 +1,11 @@
 import { Canvas } from '@react-three/fiber';
 import { Loader, Stats } from '@react-three/drei';
-import Guitar from './Guitar';
 import Lights from './Lights';
 import Altar from './Altar';
 import Vinyls from './Vinyls';
-import useUserStore from '@/store';
 import Poster from './Poster';
 import { Suspense } from 'react';
 import Controls from './Controls';
-import Drum from './Drum';
 import SelectScreen from './SelectScreen';
 
 const Experience = () => {
