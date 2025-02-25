@@ -9,9 +9,9 @@ import Poster from './Poster';
 import { Suspense } from 'react';
 import Controls from './Controls';
 import Drum from './Drum';
+import SelectScreen from './SelectScreen';
 
 const Experience = () => {
-  const isSinglePlayer = useUserStore((state) => state.isSinglePlayer);
 
   return (
     <div className="h-dvh w-dvw">
@@ -21,11 +21,7 @@ const Experience = () => {
         <Lights />
         <Controls />
 
-        <Suspense fallback={null}>
-          {isSinglePlayer && <Guitar position={[0, 10, 18]} rotation={[-Math.PI / 8, 0, Math.PI / 2]} scale={0.02} />}
-        </Suspense>
-
-        <Drum scale={0.5} />
+        <SelectScreen />
 
         <Suspense fallback={null}>
           <group position={[0, -2, 0]} scale={0.5}>
