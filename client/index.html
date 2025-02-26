@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React + TS</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      // Suppress the passive event listener warning in development
+      const originalConsoleWarn = console.warn;
+      console.warn = (...args) => {
+        if (
+          args[0] &&
+          typeof args[0] === "string" &&
+          args[0].includes("passive event listener")
+        ) {
+          return;
+        }
+        originalConsoleWarn(...args);
+      };
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
