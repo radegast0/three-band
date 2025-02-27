@@ -28,7 +28,7 @@ function App() {
         <color attach="background" args={['#3D0301']} />
         <Controls />
         <Guitar />
-        {/* <Grid args={[10, 10]} /> */}
+        <Grid args={[10, 10]} />
         <Stats />
         <Lights />
       </Canvas>
